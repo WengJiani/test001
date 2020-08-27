@@ -1,0 +1,769 @@
+<script>
+    // 正则表达式   数学
+    // Regular Expression
+    // 代码中常简写为regex、regexp或RE
+
+    // 基本上，一门编程语言都实现以正则的支持
+
+    // 正则表达式是对字符串操作的一种逻辑公式，
+    // 就是用事先定义好的一些特定字符、
+    // 及这些特定字符的组合，组成一个“规则字符串”，
+    // 这个“规则字符串”用来表达对字符串的一种过滤逻辑。
+
+    // 验证或者匹配
+    // 验证  得到的结果是true和false
+    // 匹配  从一个大的字符串中匹配到子串
+
+
+    // 创建正则表达式
+    // 1)通过RegExp构造器   new RegExp();   new String();
+    // 2)字面量（快捷方式）  /  /    "Hello"
+
+    // 1)通过RegExp构造器
+    // let r = new RegExp("abc");  // 规则
+    // console.log(r.test("abc")); // 验证  true
+    // console.log(r.test("abcdef")); // 验证  true
+    // console.log(r.test("123abcdef")); // 验证  true
+    // console.log(r.test("1a2b3c")); // 验证  false
+
+    // 2)字面量（快捷方式）
+    // let r = /abc/;
+    // console.log(r.test("abc"));  // true
+    // console.log(r.test("123abc456"));  // true
+    // console.log(r.test("123a6bc456"));  // false
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // 正则表达式的由三个部分组成
+    // 原子：最基本的组成单位，必不可少
+    // 元字符 ：用于修饰原子
+    // 模式修正符：  i, g,m
+
+    // 原子：
+    //     1）单个字符的原子
+    //          let r = /a/;
+    //          let r2 = /b/;
+    //          let r3 = /c/;
+    //     2）代表一类字符的原子
+    //          \d 表示一个十进制的数字 [0-9]  一个\d代表一个数字
+    //          \D 表示非数字
+    //          \s 表示一个空白字符（空格，tab，换页符等）
+    //          \S 表示一个非空白字符
+    //          \w 表示一个字 [0－9a-zA-Z_]
+    //          \W 表示除[0－9a-zA-Z_]之外的字符
+
+
+    // let r = /\W/;
+    // console.log(r.test("hello")); // false
+    // console.log(r.test("hello!@#")); // true
+
+    // let r = /\w/;
+    // console.log(r.test("abc")); //true
+    // console.log(r.test("   ")); //false
+    // console.log(r.test("123!@#")); //true
+    // console.log(r.test("_______abc")); //true
+
+    // let r = /\S/; // 非空白字符
+    // console.log(r.test("123")); // true
+    // console.log(r.test("123你好")); // true
+    // console.log(r.test("123 你好")); // true
+    // console.log(r.test("   ")); // false
+    // console.log(r.test("")); //  false
+
+    // let r = /\s/; // 空白字符
+    // console.log(r.test("123")); // false
+    // console.log(r.test("123你好")); // false
+    // console.log(r.test("123 你好")); // true
+
+    // let r = /\D/; // 非数字
+    // console.log(r.test("123")) // false
+    // console.log(r.test("你好1世界")) // true
+    // console.log(r.test("hello")) // true
+
+    // let r = /\d/; //  [0-9]
+    // console.log(r.test("123")) // true
+    // console.log(r.test("你好1世界")) // true
+    // console.log(r.test("hello")) // false
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // 正则有由三部分组成：
+    // 原子   1）代表一个字符串的原子   2）代表一类字符的原子
+    // 元字符  用来修改原子的
+    // 模式修正符
+
+    // 元字符
+    // 开始和结束 ^ $
+    // let r = /\d$/; // \d$以数字结尾  最后一位是数字
+    // console.log(r.test("123456789")); //true
+    // console.log(r.test("123456789hello")); //false
+
+    // let r = /^\d/; // ^\d以数字打头  第一位是数字
+    // console.log(r.test("123456789")); //true
+    // console.log(r.test("hello123456789")); //false
+
+    // let r = /^\d\d\d\d\d\d\d$/;
+    // console.log(r.test("1234567")); // true
+    // console.log(r.test("123a567")); // false
+    // console.log(r.test("1234a567")); // false
+    // console.log(r.test("12341234523456786789563")); //false
+
+    // let r = /^\d\d\d\d\d\d\d/;
+    // console.log(r.test("12341234523456786789567")); //true
+
+    // let r = /^java/;
+    // console.log(r.test("javascript")); // true
+    // console.log(r.test("js")) // false
+
+    // let r = /^java$/;
+    // console.log(r.test("javascript")); // false
+    // console.log(r.test("javascripa")); // false
+    // console.log(r.test("js")) // false
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // {}  表示数量
+      // {m}:表示前面的原子必须一定要出现m次。
+      // {m,n}:表示前面的原子至少出现m次，最多出现n次。
+      // {m,}:表示前面的原子至少出现m次，最多不限。
+
+    // 数字至少要有3个
+    // let r = /\d{3}/;
+    // console.log(r.test("1")) // false
+    // console.log(r.test("123")) // true
+    // console.log(r.test("123456789")) // true
+
+    // \d{3,5} = \d{3} 或 \d{4} 或 \d{5}
+    // let r = /\d{3,5}/; // {m,n}:表示前面的原子至少出现m次，最多出现n次。
+    // console.log(r.test("1")) // false
+    // console.log(r.test("123")) // true
+    // console.log(r.test("1234")) // true
+    // console.log(r.test("12345")) // true
+    // console.log(r.test("123456")) // true
+    // console.log(r.test("12345678912345789")) // true
+
+    // {m,}:表示前面的原子至少出现m次，最多不限
+    // \d{3,} = \d{3} 或 \d{4} 或 \d{5} 或 \d{6} 或 \d{7} ......
+    // let r = /\d{3,}/;
+    // console.log(r.test("1")) // false
+    // console.log(r.test("12"))  // false
+    // console.log(r.test("123"))  // true
+    // console.log(r.test("1234")) // true
+    // console.log(r.test("12345")) // true
+    // console.log(r.test("123457890234567890")) // true
+
+    // let r = /a\d{3}/;
+    // console.log(r.test("a123"));  // true
+    // console.log(r.test("a12345"));  // true
+    // console.log(r.test("a123456789"));  // true
+    // console.log("---------")
+    // let r1 = /a\d{3,5}/;
+    // console.log(r1.test("a123"));  // true
+    // console.log(r1.test("a12345"));  // true
+    // console.log(r1.test("a123456789"));  // true
+    // console.log("---------")
+    // let r2 = /a\d{3,}/;
+    // console.log(r2.test("a123"));  // true
+    // console.log(r2.test("a12345"));  // true
+    // console.log(r2.test("a123456789"));  // true
+
+    // /a\d{3}$/  a后台跟上3个数字并结束
+    // let r = /a\d{3}$/;
+    // console.log(r.test("a123"));  // true
+    // console.log(r.test("a12345"));  // false
+    // console.log(r.test("a123456789"));  // false
+    // console.log("---------")
+    // let r1 = /a\d{3,5}$/;  // /a\d{3,5}$/ a后面跟上3个结尾 或 a后面跟上4个结尾  或 a后面跟上5个结尾
+    // console.log(r1.test("a123"));  // true
+    // console.log(r1.test("a1234"));  // true
+    // console.log(r1.test("a12345"));  // true
+    // console.log(r1.test("a123456789"));  // false
+    // console.log("---------")
+    // let r2 = /a\d{3,}$/;
+    // console.log(r2.test("a123"));  // true
+    // console.log(r2.test("a12345"));  // true
+    // console.log(r2.test("a123456789"));  // true
+
+    // /a\d{3}/;
+    // /a\d{3,5}/;
+    // /a\d{3,}/;
+    //
+    // /a\d{3}$/
+    // /a\d{3,5}$/
+    // /a\d{3,}$/
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // *,+,?
+    // *表示 前面的原子可以出现0或者很多次。相当于{0,}
+    // +表示前面的原子至少出现1次。相当 于{1,}
+    // ？表示前面的原子可以出现0次，或者1次{0，1}
+
+    // let r = /a\d*/;
+    // console.log(r.test("a")) // true
+    // console.log(r.test("a1"))// true
+    // console.log(r.test("a12"))// true
+    // console.log(r.test("a123"))// true
+    // console.log(r.test("a1234"))// true
+
+    // let r = /a\d+/;  // {1,}
+    // console.log(r.test("a")) // false
+    // console.log(r.test("a1"))// true
+    // console.log(r.test("a12"))// true
+    // console.log(r.test("a123"))// true
+    // console.log(r.test("a1234"))// true
+
+    // {0,1}
+    // let r = /a\d?/;  // {0,1}
+    // console.log(r.test("a")) // true
+    // console.log(r.test("a1"))// true
+    // console.log(r.test("a12"))// true
+    // console.log(r.test("a123"))// true
+    // console.log(r.test("a1234"))// true
+
+    // let r = /.{5}/;  // .代表任何的原子
+    // console.log(r.test("ab")); // false
+    // console.log(r.test("12")); // false
+    // console.log(r.test("abcdfe")); // true
+    // console.log(r.test("23456789")); // true
+    // console.log(r.test("1a2b3c4d")); // true
+    // console.log(r.test(".......")); // true
+
+    // 我们验证一个字符串中至少要包含5个点
+    // let r = /...../;  // .代表任何的原子
+    // console.log(r.test("hello123")) // true
+
+    // 转义  转变原义
+    // let r = /\.{5}/;  // \.  \代表转义
+    // console.log(r.test("hello123")) // false
+    // console.log(r.test("......")) // true
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // 表示逻辑 [] |
+
+    // let r = /ab/;
+    // console.log(r.test("helloab123")); //true
+
+    // let r = /[ab]/; // 字符串出现a或者b就是true
+    // console.log(r.test("helloa123")); //true
+    // console.log(r.test("hellob123")); //true
+
+    // let r = /[^a]/;
+    // console.log(r.test("helloa123")); // true
+    // console.log(r.test("aaaaa")); // false
+
+    // let r = /[123456789]/;  // 字符串中只要出现[]中的一个原子就是true
+    // let r = /[1-9]/;  // 字符串中只要出现[]中的一个原子就是true
+    // console.log(r.test("abc123")); // true
+    // console.log(r.test("abc4")); // true
+
+    // [^abc]:只要不是abc中的任意一个，都行。
+    // let r = /[^abc]/;
+    // console.log(r.test("abc")); //false
+    // console.log(r.test("dbc")); //true
+    // console.log(r.test("1bc")); //true
+    // console.log(r.test("def")); //true
+
+    // []; (    h    t   m  l  )  |   c   s
+    // let r = /[(html)|(css)]/;
+    // console.log(r.test("(")); // true
+    // console.log(r.test("|")); // true
+    // console.log(r.test("a")); // false
+
+    // let r = /a|b/;
+    // console.log(r.test("a")) // true
+    // console.log(r.test("b")) // true
+
+
+    // 指：dog    pig    dogig    dopig
+    // let r = /dog|pig/;
+    // console.log(r.test("dog")) // true
+    // console.log(r.test("pig")) // true
+    // console.log(r.test("dopig")) // true
+    // console.log(r.test("dogig")) // true
+    // console.log(r.test("dogpig")) // true
+    // console.log(r.test("g")) // false
+    //
+    // let r = /[dog|pig]/;
+    // let r = /dog|pig/;
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // 验证手机号
+    // 分析
+    //    正确：18338898971  15034567890
+    //    错误：1833889897   150345678904  abc567890
+
+    // 规则：
+    //   1）必须是数字
+    //   2）必须11位
+    //   3）以1打头
+    //   4）第2位通常是3456789
+    //   5）必须以数字结尾
+
+    // let r = /^1[3-9]\d{9}$/;
+    // console.log(r.test("18338898971"))
+    // console.log(r.test("150345678904"))
+    // console.log(r.test("abc567890"))
+
+    // 验证身份证号  410889 1995 09 21 6121
+    // 规则
+    // 1）  18位
+    // 2） 必须以数字打头
+    // 3） 前17位必须是数字
+    // 4） 最后一位要么是数字，要么是X
+    // 5） 前六位是任意的数字 410889
+    // 6） 第七位要么是1 要么是2
+    // 7） 第八位  8  9   0
+    // 8） 第九位  0123456789
+    // 9） 第十位  0123456789
+    // 10） 第十一位  0  1
+    // 11） 第十二位  0123456789
+    // 12） 第十三位  0 1 2 3
+    // 13） 第十四位  0123456789
+
+
+    // let r = /^\d{6}[1-2][890]\d{2}[01]\d[0-3]\d{4}[\dX]$/;
+    // console.log(r.test("410889199509216121"))
+    // console.log(r.test("41088919950921612X"))
+    // console.log(r.test("410889199509216121X"))
+    // console.log(r.test("4108891995092161X"))
+    // console.log(r.test("41088919950921612|"))
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // 正则的表达式 有些面试题使用正则解决会简单一点
+    // 作用：验证  匹配
+    // 由三个部分组成：原子   元字符   模式修正符
+
+    // 原子：1）某个字符的原子   2）一类字符的原子
+
+    // 元字符：
+        // 开始和结束：/^a/   /a$/
+        // 表示数量：{3}$  {3,5}$  {3,}$  *  +  ?
+        // 逻辑：  [abc]  [dog|pig]    /dog|pig/
+        // 转义：  /./  /\./   /\[abc\]/
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // let r = /(abc)+$/;
+    // console.log(r.test("abc")) // true
+    // console.log(r.test("abcccc")) // false
+    // console.log(r.test("abcabcabc"))  // true
+    // console.log(r.test("abcde"))  // false
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+    // 进行匹配：一个大的字符串，中匹配符合要求的小的字符串
+    // let r = /^[1-9]\d*$/;
+    // ["123", index: 0, input: "123", groups: undefined]
+    // 第1个值是匹配到的子串
+    // 第2个值是指从哪个地方找到的
+    // 第3个值是源字符串（大串）
+    // console.log(r.exec("123"));
+
+    // console.log(r.exec("abc123abc")); // null
+    // console.log(r.exec("123abc")); // null
+    // // ["123456", index: 0, input: "123456", groups: undefined]
+    // console.log(r.exec("123456"));
+
+    /*let r = /[1-9]\d*!/g;
+    let s = "我今年30岁了，身高180，休息190";
+    // ["30", index: 3, input: "我今年30岁了，身高180，休息190", groups: undefined]
+    console.log(r.exec(s));
+
+    // 一次exec只能找到一个数据 你想再找一个，再进行一次exec
+    // ["180", index: 10, input: "我今年30岁了，身高180，休息190", groups: undefined]
+    console.log(r.exec(s));
+
+    // ["190", index: 16, input: "我今年30岁了，身高180，休息190", groups: undefined]
+    console.log(r.exec(s));
+
+    console.log(r.exec(s));  // null*/
+
+    let r = /[1-9]\d*/g;
+    let s = "我今年30岁了，身高180，休息190";
+
+    // res = r.exec(s)  i = j = k = 2;
+    // =赋值运算符有副作用  整体也有一个值  是右值
+    let res;
+    while(res = r.exec(s)){
+        console.log(res)
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------- -->
